@@ -13,6 +13,13 @@
  * USE ONLY in an isolated lab with explicit authorization.
  */
 
+// PHP's built-in server (php -S) does not always define STDERR.
+// Define it ourselves so fwrite(STDERR, ...) works reliably and the
+// terminal output stays smooth during the demo.
+if (!defined('STDERR')) {
+    define('STDERR', fopen('php://stderr', 'w'));
+}
+
 date_default_timezone_set('UTC');
 
 $logFile = __DIR__ . '/captured_cookies.log';
