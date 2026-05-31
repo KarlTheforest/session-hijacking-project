@@ -1,6 +1,7 @@
 ==========================================================
  XSS PAYLOADS FOR LAB DEMONSTRATION
- Replace ATTACKER_IP with your CookieCatcher host (e.g. 192.168.1.10)
+ Replace ATTACKER_IP with your CookieCatcher host.
+ In our lab (VirtualBox NAT Network) ATTACKER_IP = 10.0.2.3
  USE ONLY in an isolated, authorized lab environment.
 ==========================================================
 
@@ -31,7 +32,7 @@ The attacker then sees an entry like:
 
   === COOKIE CAPTURED ===
   TIME        : 2024-01-15 14:45:03
-  SOURCE_IP   : 192.168.1.20
+  SOURCE_IP   : 10.0.2.15
   USER_AGENT  : Mozilla/5.0 ... Chrome/120.0
   COOKIE      : PHPSESSID=abc123xyz789; user_id=12345
 

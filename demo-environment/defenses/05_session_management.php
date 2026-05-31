@@ -75,8 +75,8 @@ echo "Session validated: IP + User-Agent bound, timeouts enforced.\n";
 /*
  ATTACK SIMULATION
  -----------------
- Victim logs in from 192.168.1.20 (Chrome). Attacker steals the cookie
- and replays it from 192.168.1.100 (Firefox):
+ Victim logs in from 10.0.2.15 (IE 11). Attacker steals the cookie
+ and replays it from 10.0.2.3 (Firefox on Kali):
    - IP mismatch        -> validate_session() returns false
    - User-Agent mismatch-> validate_session() returns false
  Result: HTTP 403, session destroyed, hijack blocked.

